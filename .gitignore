@@ -1,0 +1,6 @@
+.idea
+logs
+target
+cassandra-compose.yml
+project/project
+project/target

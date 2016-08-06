@@ -1,0 +1,9 @@
+@(data: String)
+
+@import helper._
+
+@main("What do you want to watch?") {
+    <script type='text/javascript' src="/assets/javascript/render.js"></script>
+    <div id="gifBody"></div>
+    <div id="data" hidden>@Html(data)</div>
+}

@@ -1,0 +1,18 @@
+@(downloadGifRequest: Form[DownloadRequest])(implicit messages: Messages)
+
+@import helper._
+@import controllers.GifController
+
+@main("Display a gif from another website") {
+
+@form(action = routes.GifController.handleDownloadRequest()) {
+@inputText(downloadGifRequest("url"))
+@inputText(downloadGifRequest("size"))
+
+
+<div class="buttons">
+    <input type="submit" value="Download and Display Gif">
+</div>
+}
+}
+

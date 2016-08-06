@@ -1,0 +1,4 @@
+GET     /                           controllers.GifController.index
+GET     /download                   controllers.GifController.downloadForm
+GET     /handle-download            controllers.GifController.handleDownloadRequest
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,0 +1,49 @@
+version: '2'
+services:
+  image-injest:
+    image: image-injest:1.0
+    command: -Dpidfile.path=/dev/null
+    links:
+      - cassandra
+    ports:
+      - 9000
+      - 9443
+    expose:
+      - 9000
+      - 9443
+    networks:
+      all:
+        aliases:
+          - image-injest
+    environment:
+      ENVIRONMENT: local
+  cassandra:
+    image: cassandra:latest
+    command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"
+    expose:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9160
+#    ports:
+#      - 7000
+#      - 7001
+#      - 7199
+#      - 9042
+#      - 9160
+    networks:
+      - all
+#  elasticsearch:
+#    image: elasticsearch:1.5.2
+#    ports:
+#      - 9200:9200
+#    expose:
+#      - 9200
+#    networks:
+#      all:
+#        aliases:
+#          - search
+networks:
+  all:
+    driver: bridge
