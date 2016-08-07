@@ -10,9 +10,12 @@ import ImageSize.ImageSizeDefinition
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
 
-class AsciiImageRepository(override val configuration: Configuration) extends CassandraConnector with AsciiGifWriteCQL with AsciiGifReadCQL {
+class AsciiImageRepository(override val configuration: Configuration)
+  extends CassandraConnector
+  with AsciiGifWriteCQL
+  with AsciiGifReadCQL {
   import frame.Types._
-  val Log = Logger(classOf[AsciiGifWriteCQL])
+  val Log = Logger(classOf[AsciiImageRepository])
 
   createTableAsciiKeyspace
   createKeyTable

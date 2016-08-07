@@ -24,7 +24,7 @@ import play.api.libs.concurrent.Execution.Implicits._
 class ImageInjestService @Inject()(@Named("gifReader") gifReader: ActorRef, gifDownloadService: NetworkDataService, configuration: Configuration) {
   import frame.Types._
   implicit val timeout = Timeout(30000, TimeUnit.MILLISECONDS)
-  val Log = Logger(classOf[AsciiGifWriteCQL])
+  val Log = Logger(classOf[ImageInjestService])
 
   import ImageSize._
 
