@@ -1,8 +1,8 @@
-package config
+package dev.yn.cassandra
 
 import play.api.Configuration
 
-trait ConfigurationHelper {
+trait CassandraConfigurationHelper {
   val configuration: Configuration
 
   val CassandraNodesKey = "cassandra.nodes"
@@ -17,7 +17,7 @@ trait ConfigurationHelper {
     .getLong(CassandraConnectionRetryIntervalMillisKey)
     .getOrElse(2000L)
 
-  val CassandraConnectioinRetryIntervalMillisMax: Long = configuration
+  val CassandraConnectionRetryIntervalMillisMax: Long = configuration
     .getLong(CassandraConnectionRetryIntervalMaxKey)
     .getOrElse(CassandraConnectionRetryIntervalMillis * 32)
 }

@@ -4,3 +4,13 @@ target
 cassandra-compose.yml
 project/project
 project/target
+injest/.idea
+injest/logs
+injest/target
+injest/project/project
+injest/project/target
+common/.idea
+common/logs
+common/target
+common/project/project
+common/project/target

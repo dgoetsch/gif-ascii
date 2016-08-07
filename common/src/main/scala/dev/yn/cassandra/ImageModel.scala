@@ -1,11 +1,11 @@
-package cassandra
+package dev.yn.cassandra
 
 import java.nio.ByteBuffer
 import java.util.UUID
 
-import compress.GZIP
+import dev.yn.compress.GZIP
+import dev.yn.size.ImageSize
 import play.api.libs.json.JsValue
-import request.ImageSize
 
 case class ImageModel(id: UUID, extraLarge: JsValue, large: JsValue, medium: JsValue, small: JsValue, extraSmall: JsValue) {
   import ImageModel._

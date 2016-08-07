@@ -1,4 +1,4 @@
-package compress
+package dev.yn.compress
 
 import java.io._
 import java.util.zip.{GZIPInputStream, GZIPOutputStream}
