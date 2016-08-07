@@ -2,15 +2,15 @@ package cassandra
 
 import com.datastax.driver.core._
 import com.datastax.driver.core.exceptions.NoHostAvailableException
+import config.ConfigurationHelper
 import play.api.Logger
 import scala.collection.JavaConversions._
+
 /**
   * Maintains connects to cassadra, recovers if host disapperars
   */
-class CassandraConnector(val node: String) { //TODO make node name a configuration
+trait CassandraConnector extends ConfigurationHelper {
   private val Log = Logger(classOf[CassandraConnector])
-  val connectionRetryIntervalMillis = 2000
-  val connectioinRetryIntervalMillisMax = 60000
 
   private var currentCluster = buildCluster()
   private var currentSession = buildSession()
@@ -34,7 +34,7 @@ class CassandraConnector(val node: String) { //TODO make node name a configurati
   private def buildCluster(): Cluster = {
     catchNoHostAndRetry( () =>
       Cluster.builder()
-        .addContactPoint(node)
+        .addContactPoints(CassandraNodes: _*)
         .build()
     )
   }
@@ -62,14 +62,14 @@ class CassandraConnector(val node: String) { //TODO make node name a configurati
     * @tparam T
     * @return
     */
-  private def catchNoHostAndRetry[T](action: () => T, interval: Long = connectionRetryIntervalMillis): T = this.synchronized {
+  private def catchNoHostAndRetry[T](action: () => T, interval: Long = CassandraConnectionRetryIntervalMillis): T = this.synchronized {
     try {
       action()
     } catch {
       case noHost: NoHostAvailableException =>
-        Log.error(s"could not connect to host: $node, retrying in $interval")
+        Log.error(s"could not connect to hosts: $CassandraNodes, retrying in $interval")
         Thread.sleep(interval)
-        catchNoHostAndRetry(action, math.min(interval * 2, connectioinRetryIntervalMillisMax))
+        catchNoHostAndRetry(action, math.min(interval * 2, CassandraConnectioinRetryIntervalMillisMax))
     }
   }
 }

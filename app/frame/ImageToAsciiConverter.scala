@@ -7,6 +7,7 @@ class ImageToAsciiConverter
 
 object ImageToAsciiConverter {
   import ImageChunkUtils._
+  import frame.Types._
 
   val Log = Logger(classOf[ImageToAsciiConverter])
 
@@ -14,7 +15,7 @@ object ImageToAsciiConverter {
 
   val xtraModifiers = Seq("xtra", "supe", "more")
 
-  def toAscii(request: ProcessFrameRequest): Seq[String] = {
+  def toAscii(request: ProcessFrameRequest): AsciiFrame = {
     val height: Int = request.frame.getHeight()
     val width: Int = request.frame.getWidth()
     val heightMultiplier = math.max(1, height / request.size)

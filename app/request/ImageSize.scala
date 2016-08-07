@@ -5,7 +5,7 @@ object ImageSize {
   final val SMALL = 25
   final val MEDIUM = 50
   final val LARGE = 100
-  final val EXTRA_LARGE = 200
+  final val EXTRA_LARGE = 150
 
   final val EXTRA_SMALL_KEY = "extraSmall"
   final val SMALL_KEY = "small"
