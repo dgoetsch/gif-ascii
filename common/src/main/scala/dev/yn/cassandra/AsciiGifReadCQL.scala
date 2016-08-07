@@ -13,7 +13,7 @@ import play.api.Logger
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
 
-trait AsciiGifReadCQL extends BaseAsciiGIFCQL{
+trait AsciiGifReadCQL extends BaseAsciiGifCQL {
   import AsciiGifReadCQL._
 
   /**
@@ -43,7 +43,7 @@ trait AsciiGifReadCQL extends BaseAsciiGIFCQL{
 }
 
 object AsciiGifReadCQL {
-  import BaseAsciiGIFCQL._
+  import BaseAsciiGifCQL._
   private val Log = Logger(classOf[AsciiGifReadCQL])
 
   private def readKeyStatement(url: String): Where = {

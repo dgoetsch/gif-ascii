@@ -11,9 +11,9 @@ import play.api.libs.concurrent.Execution.Implicits._
 /**
   * Created by devyn on 8/7/16.
   */
-trait BaseAsciiGIFCQL {
-  import BaseAsciiGIFCQL._
-  private val Log = Logger(classOf[BaseAsciiGIFCQL])
+trait BaseAsciiGifCQL {
+  import BaseAsciiGifCQL._
+  private val Log = Logger(classOf[BaseAsciiGifCQL])
 
   def createTableAsciiKeyspace(implicit session: Session) = {
     session.execute(asciiKeySpaceCQL)
@@ -40,7 +40,7 @@ trait BaseAsciiGIFCQL {
   }
 }
 
-object BaseAsciiGIFCQL {
+object BaseAsciiGifCQL {
   implicit class ImageSizeDefnitionUtil(sizeDefinition: ImageSizeDefinition) {
     def fieldName: String = {
       sizeDefinition match {

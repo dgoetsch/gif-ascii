@@ -49,7 +49,7 @@ trait CassandraConnector extends CassandraConfigurationHelper {
     val meta = cluster().getMetadata
     Log.info(s"Connected to cluster: ${meta.getClusterName()}");
     meta.getAllHosts.foreach { host =>
-      Log.info(s"Datacenter: %s; Host: %s; Rack: ${host.getDatacenter()}, ${host.getAddress()}, ${host.getRack()}")
+      Log.info(s"Datacenter: ${host.getDatacenter()}; Host: ${host.getAddress()}; Rack: ${host.getRack()}")
     }
     meta
   }

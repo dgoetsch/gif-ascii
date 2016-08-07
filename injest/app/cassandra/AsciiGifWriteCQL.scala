@@ -1,9 +1,9 @@
 package cassandra
 
-import com.datastax.driver.core.querybuilder.{BuiltStatement, Insert}
+import com.datastax.driver.core.querybuilder.Insert
 import com.datastax.driver.core.querybuilder.QueryBuilder._
 import com.datastax.driver.core._
-import dev.yn.cassandra.{BaseAsciiGIFCQL, UrlKeyModel, CompressedImageModel}
+import dev.yn.cassandra.{BaseAsciiGifCQL, UrlKeyModel, CompressedImageModel}
 import play.api.Logger
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
@@ -11,7 +11,7 @@ import play.api.libs.concurrent.Execution.Implicits._
 /**
   * CQL utilities for saving and retrieving ascii gifs
   */
-trait AsciiGifWriteCQL extends BaseAsciiGIFCQL {
+trait AsciiGifWriteCQL extends BaseAsciiGifCQL {
   import AsciiGifWriteCQL._
 
   private final val Log = Logger(classOf[AsciiGifWriteCQL])
@@ -38,7 +38,7 @@ trait AsciiGifWriteCQL extends BaseAsciiGIFCQL {
 }
 
 object AsciiGifWriteCQL {
-  import BaseAsciiGIFCQL._
+  import BaseAsciiGifCQL._
 
   private def insertImageStatement(image: CompressedImageModel): Insert =
     insertInto(AsciiImageKeyspace, CompositeTable)
