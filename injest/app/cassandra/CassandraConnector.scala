@@ -1,7 +1,7 @@
 package cassandra
 
-import com.datastax.driver.core._
 import com.datastax.driver.core.exceptions.NoHostAvailableException
+import com.datastax.driver.core.{Cluster, Session}
 import config.ConfigurationHelper
 import play.api.Logger
 import scala.collection.JavaConversions._

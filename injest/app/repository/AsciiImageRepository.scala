@@ -1,6 +1,7 @@
 package repository
 
 import cassandra._
+import config.ConfigurationHelper
 import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 import request.ImageSize.ImageSizeDefinition

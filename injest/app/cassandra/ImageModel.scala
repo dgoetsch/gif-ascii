@@ -2,8 +2,7 @@ package cassandra
 
 import java.nio.ByteBuffer
 import java.util.UUID
-
-import compress.GZIP
+import dev.yn.compress.GZIP
 import play.api.libs.json.JsValue
 import request.ImageSize
 
