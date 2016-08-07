@@ -2,6 +2,7 @@ package actors
 
 import java.io.InputStream
 import javax.imageio.{ImageIO, ImageReader}
+import dev.yn.size.ImageSize
 import frame.ImageToAsciiConverter
 import ImageToAsciiConverter.ProcessFrameRequest
 import actors.GifReader.{TransformResult, TransformRequest}
@@ -9,7 +10,6 @@ import akka.actor.{ActorLogging, Actor}
 import javax.inject.Singleton
 import com.sun.imageio.plugins.gif.{GIFImageReaderSpi, GIFImageReader}
 import play.api.Logger
-import request.ImageSize
 
 @Singleton
 class GifReader extends Actor with ActorLogging {

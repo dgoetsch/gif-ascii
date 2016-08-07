@@ -1,15 +1,14 @@
-package cassandra
+package dev.yn.cassandra
 
 import com.datastax.driver.core.exceptions.NoHostAvailableException
 import com.datastax.driver.core.{Cluster, Session}
-import config.ConfigurationHelper
 import play.api.Logger
 import scala.collection.JavaConversions._
 
 /**
   * Maintains connects to cassadra, recovers if host disapperars
   */
-trait CassandraConnector extends ConfigurationHelper {
+trait CassandraConnector extends CassandraConfigurationHelper {
   private val Log = Logger(classOf[CassandraConnector])
 
   private var currentCluster = buildCluster()
@@ -69,7 +68,7 @@ trait CassandraConnector extends ConfigurationHelper {
       case noHost: NoHostAvailableException =>
         Log.error(s"could not connect to hosts: $CassandraNodes, retrying in $interval")
         Thread.sleep(interval)
-        catchNoHostAndRetry(action, math.min(interval * 2, CassandraConnectioinRetryIntervalMillisMax))
+        catchNoHostAndRetry(action, math.min(interval * 2, CassandraConnectionRetryIntervalMillisMax))
     }
   }
 }

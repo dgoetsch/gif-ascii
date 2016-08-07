@@ -1,4 +1,4 @@
-package request
+package dev.yn.size
 
 object ImageSize {
   final val EXTRA_SMALL = 10

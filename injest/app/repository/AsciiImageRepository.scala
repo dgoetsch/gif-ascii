@@ -1,17 +1,18 @@
 package repository
 
 import cassandra._
-import config.ConfigurationHelper
+import dev.yn.cassandra.{AsciiGifReadCQL, UrlKeyModel, ImageModel, CassandraConnector}
+import dev.yn.size.ImageSize
 import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
-import request.ImageSize.ImageSizeDefinition
+import ImageSize.ImageSizeDefinition
 
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
 
-class AsciiImageRepository(override val configuration: Configuration) extends CassandraConnector with AsciiGifCQL {
+class AsciiImageRepository(override val configuration: Configuration) extends CassandraConnector with AsciiGifWriteCQL with AsciiGifReadCQL {
   import frame.Types._
-  val Log = Logger(classOf[AsciiGifCQL])
+  val Log = Logger(classOf[AsciiGifWriteCQL])
 
   createTableAsciiKeyspace
   createKeyTable

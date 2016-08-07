@@ -21,6 +21,10 @@ val appDependencies = Seq(
   specs2 % Test
 )
 
+val playDependencies = Seq(
+  "com.typesafe.play" %% "play" % "2.5.4"
+)
+
 val akkaDependencies = Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
   "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
@@ -51,7 +55,7 @@ lazy val root = (project in file("."))
 lazy val common = (project in file("common")).
   settings(commonSettings: _*).
   settings(
-    libraryDependencies ++= cassandraDependencies ++ akkaDependencies
+    libraryDependencies ++= cassandraDependencies ++ akkaDependencies ++ playDependencies
   )
 
 lazy val injest = (project in file("injest")).

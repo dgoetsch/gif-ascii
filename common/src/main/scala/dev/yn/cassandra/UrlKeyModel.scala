@@ -1,4 +1,4 @@
-package cassandra
+package dev.yn.cassandra
 
 import java.util.UUID
 

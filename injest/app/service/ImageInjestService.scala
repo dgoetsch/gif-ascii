@@ -8,8 +8,10 @@ import javax.inject.{Singleton, Named, Inject}
 import actors.GifReader.{TransformRequest, TransformResult}
 import akka.actor.ActorRef
 import akka.util.Timeout
-import cassandra.{UrlKeyModel, AsciiGifCQL, ImageModel}
+import cassandra.AsciiGifWriteCQL
 import controllers.DownloadRequest
+import dev.yn.cassandra.{UrlKeyModel, ImageModel}
+import dev.yn.size.ImageSize
 import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 import repository.AsciiImageRepository
@@ -22,9 +24,9 @@ import play.api.libs.concurrent.Execution.Implicits._
 class ImageInjestService @Inject()(@Named("gifReader") gifReader: ActorRef, gifDownloadService: NetworkDataService, configuration: Configuration) {
   import frame.Types._
   implicit val timeout = Timeout(30000, TimeUnit.MILLISECONDS)
-  val Log = Logger(classOf[AsciiGifCQL])
+  val Log = Logger(classOf[AsciiGifWriteCQL])
 
-  import request.ImageSize._
+  import ImageSize._
 
   lazy val repository = new AsciiImageRepository(configuration)
 
