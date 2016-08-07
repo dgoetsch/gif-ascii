@@ -12,6 +12,7 @@ import play.api.libs.json.Json
 import play.api.data._
 import play.api.data.Forms._
 import service.ImageInjestService
+import play.api.libs.concurrent.Execution.Implicits._
 
 case class DisplayRequest(name: UUID, size: Option[String])
 case class DownloadRequest(url: String, size: Option[String])
@@ -19,8 +20,6 @@ case class DownloadRequest(url: String, size: Option[String])
 @Singleton
 class GifController @Inject()(injestService: ImageInjestService) extends Controller {
   val GIFHTML = "<script type='text/javascript' src=\"/assets/javascript/render.js\"></script><div id=\"gifBody\"></div><div id=\"gifData\" hidden>%PLACEHOLDER%</div>"
-
-  import play.api.libs.concurrent.Execution.Implicits._
 
   implicit val timeout = Timeout(10000, TimeUnit.MILLISECONDS)
 

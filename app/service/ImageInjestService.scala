@@ -10,7 +10,7 @@ import akka.actor.ActorRef
 import akka.util.Timeout
 import cassandra.{UrlKeyModel, AsciiGifCQL, ImageModel}
 import controllers.DownloadRequest
-import play.api.Logger
+import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 import repository.AsciiImageRepository
 import akka.pattern.ask
@@ -19,15 +19,16 @@ import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
 
 @Singleton
-class ImageInjestService @Inject()(@Named("gifReader") gifReader: ActorRef, gifDownloadService: NetworkDataService) {
+class ImageInjestService @Inject()(@Named("gifReader") gifReader: ActorRef, gifDownloadService: NetworkDataService, configuration: Configuration) {
+  import frame.Types._
   implicit val timeout = Timeout(30000, TimeUnit.MILLISECONDS)
   val Log = Logger(classOf[AsciiGifCQL])
 
   import request.ImageSize._
 
-  lazy val repository = new AsciiImageRepository()
+  lazy val repository = new AsciiImageRepository(configuration)
 
-  def injest(downloadRequest: DownloadRequest): Future[Seq[Seq[String]]] = {
+  def injest(downloadRequest: DownloadRequest): Future[AsciiGif] = {
     getAscii(downloadRequest).flatMap {
       case Some(previouslySaved) =>
         Log.info(s"fetched already existing image $downloadRequest")
@@ -47,7 +48,7 @@ class ImageInjestService @Inject()(@Named("gifReader") gifReader: ActorRef, gifD
     }
   }
 
-  def getAscii(downloadRequest: DownloadRequest): Future[Option[Seq[Seq[String]]]] = {
+  def getAscii(downloadRequest: DownloadRequest): Future[Option[AsciiGif]] = {
     repository.fetchGif(downloadRequest.url, downloadRequest.size.map(_.targetDefinition).getOrElse(MediumImage))
   }
 
