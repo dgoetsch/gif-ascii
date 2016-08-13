@@ -12,11 +12,19 @@ services:
       - 9000
       - 9443
     networks:
-      all:
-        aliases:
-          - image-injest
+      - all
     environment:
       ENVIRONMENT: local
+  image-injest-lb:
+    ports:
+      - 9000:9000
+    tty: true
+    image: rancher/load-balancer-service
+    links:
+      - image-injest:image-injest
+    stdin_open: true
+    networks:
+      - all
   cassandra:
     image: cassandra:latest
     command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"

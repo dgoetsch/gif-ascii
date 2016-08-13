@@ -1,0 +1,24 @@
+http://docs.rancher.com/rancher/latest/en/quick-start-guide/
+http://rancher.com/running-cassandra-on-rancher/
+image-injest:
+  scale: 1
+image-injest-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+cassandra:
+  environment:
+    RANCHER_ENABLE: 'true'
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: pboos/rancher-cassandra:3.1
+  stdin_open: true
+  volumes:
+    - /var/lib/cassandra
