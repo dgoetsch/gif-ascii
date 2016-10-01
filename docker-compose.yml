@@ -6,11 +6,8 @@ services:
     links:
       - cassandra
     ports:
-      - 9000
-      - 9443
-    expose:
-      - 9000
-      - 9443
+      - "9000:9000"
+      - "9443:9443"
     networks:
       all:
         aliases:
@@ -26,24 +23,8 @@ services:
       - 7199
       - 9042
       - 9160
-#    ports:
-#      - 7000
-#      - 7001
-#      - 7199
-#      - 9042
-#      - 9160
     networks:
       - all
-#  elasticsearch:
-#    image: elasticsearch:1.5.2
-#    ports:
-#      - 9200:9200
-#    expose:
-#      - 9200
-#    networks:
-#      all:
-#        aliases:
-#          - search
 networks:
   all:
     driver: bridge

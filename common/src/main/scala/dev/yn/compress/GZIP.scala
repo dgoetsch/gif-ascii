@@ -4,7 +4,7 @@ import java.io._
 import java.util.zip.{GZIPInputStream, GZIPOutputStream}
 
 object GZIP {
-  def outputStream(s: String): ByteArrayOutputStream = {
+  def compressStringToStream(s: String): ByteArrayOutputStream = {
     val outputStream = new ByteArrayOutputStream(s.length)
     val writer = new BufferedWriter(new OutputStreamWriter(new GZIPOutputStream(outputStream)));
     writer.append(s)
@@ -12,11 +12,11 @@ object GZIP {
     outputStream
   }
 
-  def write(s: String): Array[Byte] = {
-    outputStream(s).toByteArray
+  def compressString(s: String): Array[Byte] = {
+    compressStringToStream(s).toByteArray
   }
 
-  def byteStream(gzip: Array[Byte]) = {
+  def decompressStringToStream(gzip: Array[Byte]) = {
     val inputStream = new GZIPInputStream(new ByteArrayInputStream(gzip))
     val out = new ByteArrayOutputStream()
     val buffer: Array[Byte] = new Array(1024)
@@ -28,7 +28,7 @@ object GZIP {
     out
   }
 
-  def read(bytes: Array[Byte]): String = {
-    new String(byteStream(bytes).toByteArray)
+  def decompress(bytes: Array[Byte]): String = {
+    new String(decompressStringToStream(bytes).toByteArray)
   }
 }

@@ -27,6 +27,6 @@ case class ImageModel(id: UUID, extraLarge: JsValue, large: JsValue, medium: JsV
 case class CompressedImageModel(id: UUID, extraLarge: ByteBuffer, large: ByteBuffer, medium: ByteBuffer, small: ByteBuffer, extraSmall: ByteBuffer)
 
 object ImageModel {
-  def decompress(buffer: ByteBuffer) = GZIP.read(buffer.array())
-  def compressJson(jsValue: JsValue): ByteBuffer = ByteBuffer.wrap(GZIP.write(jsValue.toString))
+  def decompress(buffer: ByteBuffer) = GZIP.decompress(buffer.array())
+  def compressJson(jsValue: JsValue): ByteBuffer = ByteBuffer.wrap(GZIP.compressString(jsValue.toString))
 }
