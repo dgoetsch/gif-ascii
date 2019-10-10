@@ -13,6 +13,7 @@ Downloads arbitrary gifs from a url, transforms them to ascii, saves them in a d
 if you are weary of jvm versions
 
 1. `docker-compose up` - builds and starts application in docker
+2. browser to [http://localhost:9000](http://localhost:9000)
 
 #### Use sbt docker build image
 if you are confident in your local environment
