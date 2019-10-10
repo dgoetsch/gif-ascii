@@ -2,6 +2,8 @@
 
 Downloads arbitrary gifs from a url, transforms them to ascii, saves them in a db.
 
+Note: not all gifs work, I went through a whole bunch  of batman gifs that caused mysterious array out of bounds exceptions.  I'm sure its something I should  be handling better.
+
 ### Required Software
 * Java 11
 * [sbt](http://www.scala-sbt.org/download.html)
