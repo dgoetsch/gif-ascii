@@ -1,8 +1,14 @@
 version: '2'
 services:
   image-injest:
-    image: image-injest:1.0
-    command: -Dpidfile.path=/dev/null
+#   use the image from sbt docker:publishLlocal
+#    image: image-injest:1.0
+#    command: -Dpidfile.path=/dev/null
+#   or use the dockerized development environment
+    build: .
+    command: /usr/src/app/run.sh
+    stdin_open: true
+#   end
     links:
       - cassandra
     ports:

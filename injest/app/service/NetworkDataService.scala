@@ -40,7 +40,7 @@ class NetworkDataService @Inject()(wSClient: WSClient) {
                   (Seq())
                   { (buffers, bytes) => buffers :+ bytes.asByteBuffer }
               ).map { byteBuffers =>
-                  val buffer = ByteBuffer.allocate(byteBuffers.map(_.limit).sum)
+                  val buffer = ByteBuffer.allocate(byteBuffers.map { byteBuffer => byteBuffer.limit() }.sum)
                   byteBuffers.foreach { subBuffer => buffer.put(subBuffer) }
                   buffer
               }

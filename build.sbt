@@ -9,6 +9,8 @@ val appVersion = "1.0"
 val akkaVersion  = "2.4.8"
 val cassandraDriverVersion = "3.1.0"
 
+
+
 val appDependencies = Seq(
   "commons-codec" % "commons-codec" % "1.7",
   "com.google.inject" % "guice" % "4.0",
@@ -67,6 +69,7 @@ lazy val injest = (project in file("injest")).
     packageSummary in Docker := "Turns gifs into ascii",
     packageDescription := "Docker image injest service",
     dockerExposedPorts in Docker := Seq(9000, 9443),
-    packageName in Docker := "image-injest"
+    packageName in Docker := "image-injest",
+    dockerBaseImage := "adoptopenjdk/openjdk11:jdk-11.0.4_11-debian"
   ).
   dependsOn(common)

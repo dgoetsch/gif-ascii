@@ -2,19 +2,22 @@
 
 Downloads arbitrary gifs from a url, transforms them to ascii, saves them in a db.
 
-### Future Plans
-
-* Integrate with elastic search for tagging + naming
-* Gif Speed Configuration (probabaly UI only, could store configuration in db)
-* Tests (next on list)
-
 ### Required Software
-
+* Java 11
 * [sbt](http://www.scala-sbt.org/download.html)
 * [Docker](https://docs.docker.com/engine/installation/)
 
 ### Run the application
 
+#### Out of the box
+if you are weary of jvm versions
+
+1. `docker-compose up` - builds and starts application in docker
+
+#### Use sbt docker build image
+if you are confident in your local environment
+
+0. update docker-compose, comment out build section of image-injest and uncomment image section
 1. publish docker image for service `sbt docker:publishLocal`
 2. run docker-compose: `docker-compose up`
 3. browser to [http://localhost:9000](http://localhost:9000)
